@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { PresetsDto } from './dto/presets.dto';
 import { PresetsService } from './presets.service';
 import { Preset } from './interfaces/preset.interface';
+import { CreatePresetDto } from './dto/create-preset.dto';
 
 @Controller('presets')
 export class PresetsController {
@@ -11,7 +11,7 @@ export class PresetsController {
     return this.presetsService.findAll();
   }
   @Post()
-  create(@Body() preset: PresetsDto) {
-    this.presetsService.create(preset);
+  create(@Body() preset: CreatePresetDto): Promise<Preset> {
+    return this.presetsService.create(preset);
   }
 }
